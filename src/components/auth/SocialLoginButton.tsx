@@ -12,7 +12,7 @@ const SocialLoginButtons = ({ provider }: SocialLoginButtonProps) => {
   const providerTyped = provider as Provider;
 
   const handleSocialLogin = async () => {
-    await supabase.auth.signInWithOAuth({
+    const { data, error } = await supabase.auth.signInWithOAuth({
       provider: providerTyped,
       options: {
         // サーバー側でのリダイレクトURLを指定
@@ -21,6 +21,12 @@ const SocialLoginButtons = ({ provider }: SocialLoginButtonProps) => {
         redirectTo: "http://localhost:3000/auth/callback",
       },
     });
+    if (error) {
+      console.error("ログイン失敗", error);
+    }
+    if (data) {
+      console.log("ログイン成功", data);
+    }
   };
 
   return (

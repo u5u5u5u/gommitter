@@ -10,6 +10,10 @@ interface SocialLoginButtonProps {
 const SocialLoginButtons = ({ provider }: SocialLoginButtonProps) => {
   const supabase = createClient();
   const providerTyped = provider as Provider;
+  const redirectUrl =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000/auth/callback"
+      : `${window.location.origin}/auth/callback`;
 
   const handleSocialLogin = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
@@ -18,7 +22,7 @@ const SocialLoginButtons = ({ provider }: SocialLoginButtonProps) => {
         // サーバー側でのリダイレクトURLを指定
         // redirectTo: `${window.location.origin}/auth/callback`,
         // ローカル環境でのリダイレクトURLを指定
-        redirectTo: "http://localhost:3000/auth/callback",
+        redirectTo: redirectUrl,
       },
     });
     if (error) {

@@ -36,12 +36,13 @@ export default function Home() {
         <p>Loading...</p>
       ) : (
         <ul>
-          {commits.map((commit) => (
-            <li key={commit.sha}>
-              <p>{commit.sha}</p>
-              <p>{commit.message}</p>
-            </li>
-          ))}
+          {commits &&
+            commits.map((commit) => (
+              <li key={commit.sha}>
+                <p>{commit.sha}</p>
+                <p>{commit.message}</p>
+              </li>
+            ))}
         </ul>
       )}
     </div>

@@ -10,6 +10,17 @@ export async function GET(request: Request) {
   const next = searchParams.get("next") ?? "/";
 
   if (code) {
+    // try {
+    //   const response = await fetch(`${origin}/api/github/token`, {
+    //     method: "POST",
+    //     body: JSON.stringify({ code }),
+    //   });
+    //   const data = await response.text();
+    //   console.log("data", data);
+    // } catch (error) {
+    //   console.error("Failed to fetch token", error);
+    // }
+
     const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {

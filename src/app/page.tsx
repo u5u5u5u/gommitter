@@ -15,7 +15,7 @@ export default function Home() {
 
       try {
         const response = await fetch(
-          "/api/github?owner=u5u5u5u&repo=e-zuka-journey"
+          "/api/github/commit?owner=u5u5u5u&repo=e-zuka-journey"
         );
         const { commits } = await response.json();
         setCommits(commits);

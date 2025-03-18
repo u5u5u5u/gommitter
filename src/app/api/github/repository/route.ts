@@ -1,23 +1,13 @@
 import { NextResponse } from "next/server";
-import { fetchCommits } from "@/lib/github";
+import { fetchRepositories } from "@/lib/github";
 import { createClient } from "@/utils/supabase/server";
 
-export async function GET(req: Request) {
-  const url = new URL(req.url);
-  const repoOwner = url.searchParams.get("owner");
-  const repoName = url.searchParams.get("repo");
+export async function GET() {
   const supabase = await createClient();
 
   const { data, error } = await supabase.auth.getUser();
   if (error || !data.user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  if (!repoOwner || !repoName) {
-    return NextResponse.json(
-      { error: "Missing owner or repo" },
-      { status: 400 }
-    );
   }
 
   const accessToken = process.env.GITHUB_ACCESS_TOKEN;
@@ -29,16 +19,14 @@ export async function GET(req: Request) {
   }
 
   try {
-    const commits = await fetchCommits(
+    const repositories = await fetchRepositories(
       accessToken,
-      repoOwner,
-      repoName,
       data.user.user_metadata.user_name
     );
-    return NextResponse.json({ commits });
+    return NextResponse.json({ repositories });
   } catch {
     return NextResponse.json(
-      { error: "Failed to fetch commits" },
+      { error: "Failed to fetch repositories" },
       { status: 500 }
     );
   }

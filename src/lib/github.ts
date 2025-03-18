@@ -28,4 +28,24 @@ const fetchCommits = async (
   }
 };
 
-export default fetchCommits;
+const fetchRepositories = async (accessToken: string, username: string) => {
+  const octokit = new Octokit({ auth: accessToken });
+
+  try {
+    const response = await octokit.rest.repos.listForUser({
+      username,
+    });
+    console.log(response.data[0]);
+
+    return response.data.map((repo) => ({
+      id: repo.id,
+      name: repo.name,
+      owner: repo.owner.login,
+    }));
+  } catch (error) {
+    console.error("Failed to fetch repositories: ", error);
+    throw new Error("Failed to fetch repositories");
+  }
+};
+
+export { fetchCommits, fetchRepositories };

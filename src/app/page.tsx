@@ -2,14 +2,12 @@
 
 import { useEffect, useState } from "react";
 import SignOutButton from "@/components/auth/SignOutButton";
+import type { Commit } from "@/types/commit";
+import type { Repository } from "@/types/repository";
 
 export default function Home() {
-  const [commits, setCommits] = useState<{ sha: string; message: string }[]>(
-    []
-  );
-  const [repositories, setRepositories] = useState<
-    { id: string; name: string; owner: string }[]
-  >([]);
+  const [commits, setCommits] = useState<Commit[]>([]);
+  const [repositories, setRepositories] = useState<Repository[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

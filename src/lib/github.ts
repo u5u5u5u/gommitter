@@ -18,9 +18,12 @@ const fetchCommits = async (
       (commit) => commit.author?.login === username
     );
 
+    // console.log(filteredCommits[0]);
+
     return filteredCommits.map((commit) => ({
       sha: commit.sha,
       message: commit.commit.message,
+      date: commit.commit.author?.date,
     }));
   } catch (error) {
     console.error("Failed to fetch commits: ", error);
@@ -35,12 +38,15 @@ const fetchRepositories = async (accessToken: string, username: string) => {
     const response = await octokit.rest.repos.listForUser({
       username,
     });
-    console.log(response.data[0]);
+    
+    // console.log(response.data[0]);
 
     return response.data.map((repo) => ({
       id: repo.id,
       name: repo.name,
       owner: repo.owner.login,
+      created_at: repo.created_at,
+      updated_at: repo.updated_at,
     }));
   } catch (error) {
     console.error("Failed to fetch repositories: ", error);

@@ -65,8 +65,8 @@ export default function Home() {
         <ul>
           {commits &&
             commits.map((commit) => (
-              <li key={commit.sha}>
-                <p>{commit.sha}</p>
+              <li key={commit.id}>
+                <p>{commit.id}</p>
                 <p>{commit.message}</p>
               </li>
             ))}

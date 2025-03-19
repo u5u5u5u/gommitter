@@ -1,44 +1,29 @@
-"use client";
-
 import SignOutButton from "@/components/auth/SignOutButton";
-import type { Repository } from "@/types/repository";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { createClient } from "@/utils/supabase/server";
 
-export default function Home() {
-  const [repositories, setRepositories] = useState<Repository[]>([]);
-
-  useEffect(() => {
-    const fetchRepositories = async () => {
-      try {
-        const response = await fetch("/api/github/committed-repository");
-        const { repositories } = await response.json();
-        setRepositories(repositories);
-      } catch (error) {
-        console.error("Failed to fetch repositories", error);
-      }
-    };
-    fetchRepositories();
-  }, []);
-
-  console.log("Repositories:", repositories);
+export default async function Home() {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("commits")
+    .select("*, user_id(user_name)");
+  console.log(data);
+  if (error) {
+    console.error(error);
+    return <div>Failed to fetch data</div>;
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <SignOutButton />
-      <h1 className="text-4xl font-bold">Repositories</h1>
-      <ul>
-        {repositories &&
-          repositories.map((repository) => (
-            <Link
-              key={repository.id}
-              href={`/repositories/${repository.name}/${repository.owner}`}
-            >
-              <li>
-                <p>{repository.name}</p>
-              </li>
-            </Link>
-          ))}
+      <h1 className="text-2xl font-bold">Home</h1>
+      <ul className="mt-4">
+        {data?.map((commit) => (
+          <li key={commit.id} className="p-2 border-b">
+            <p>{commit.message}</p>
+            <p>{commit.created_at}</p>
+            <p>{commit.user_id.user_name}</p>
+          </li>
+        ))}
       </ul>
     </div>
   );

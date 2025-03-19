@@ -21,7 +21,7 @@ const fetchCommits = async (
     // console.log(filteredCommits[0]);
 
     return filteredCommits.map((commit) => ({
-      sha: commit.sha,
+      id: commit.sha,
       message: commit.commit.message,
       date: commit.commit.author?.date,
     }));
@@ -38,7 +38,7 @@ const fetchRepositories = async (accessToken: string, username: string) => {
     const response = await octokit.rest.repos.listForUser({
       username,
     });
-    
+
     // console.log(response.data[0]);
 
     return response.data.map((repo) => ({
@@ -54,4 +54,46 @@ const fetchRepositories = async (accessToken: string, username: string) => {
   }
 };
 
-export { fetchCommits, fetchRepositories };
+const getCommittedRepositories = async (accessToken: string) => {
+  const octokit = new Octokit({ auth: accessToken });
+
+  try {
+    const { data: user } = await octokit.request("GET /user");
+
+    const { data: events } = await octokit.request(
+      `GET /users/${user.login}/events`,
+      {
+        per_page: 100,
+      }
+    );
+
+    // console.log("Events:", events);
+
+    const committedRepositories = new Map<
+      number,
+      {
+      id: number;
+      owner: string;
+      name: string;
+      }
+    >();
+    events.forEach((event) => {
+      if (event.type === "PushEvent") {
+      committedRepositories.set(event.repo.id, {
+        id: event.repo.id,
+        owner: event.repo.name.split("/")[0],
+        name: event.repo.name.split("/")[1],
+      });
+      }
+    });
+
+    // console.log("Committed repositories:", committedRepositories);
+
+    return Array.from(committedRepositories.values());
+  } catch (error) {
+    console.error("Error fetching repositories:", error);
+    return [];
+  }
+};
+
+export { fetchCommits, fetchRepositories, getCommittedRepositories };

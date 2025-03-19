@@ -21,8 +21,6 @@ export default function Home() {
     fetchRepositories();
   }, []);
 
-  console.log("Repositories:", repositories);
-
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <SignOutButton />

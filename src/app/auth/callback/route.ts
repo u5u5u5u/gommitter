@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 // The client you created from the Server-Side Auth instructions
 import { createClient } from "@/utils/supabase/server";
+import { getUser } from "@/utils/supabase/auth";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
@@ -24,6 +25,22 @@ export async function GET(request: Request) {
     const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
+      const userData = await getUser();
+      if (userData) {
+        console.log("userData", userData);
+        const { id, user_name, display_name, avatar_url } = userData;
+        const { error } = await supabase.from("users").upsert({
+          id: id,
+          user_name: user_name,
+          display_name: display_name,
+          avatar_url: avatar_url,
+        });
+        if (error) {
+          console.error("Failed to upsert user", error);
+        }
+      } else {
+        console.error("Failed to exchange code for session", error);
+      }
       const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
       const isLocalEnv = process.env.NODE_ENV === "development";
       if (isLocalEnv) {

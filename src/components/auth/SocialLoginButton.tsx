@@ -2,6 +2,7 @@
 
 import { createClient } from "@/utils/supabase/client";
 import { Provider } from "@supabase/auth-js";
+// import { getUser } from "@/utils/supabase/server";
 
 interface SocialLoginButtonProps {
   provider: string;

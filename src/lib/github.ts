@@ -67,24 +67,22 @@ const getCommittedRepositories = async (accessToken: string) => {
       }
     );
 
-    // console.log("Events:", events);
-
     const committedRepositories = new Map<
       number,
       {
-      id: number;
-      owner: string;
-      name: string;
+        id: number;
+        owner: string;
+        name: string;
       }
     >();
     events.forEach((event) => {
-      if (event.type === "PushEvent") {
-      committedRepositories.set(event.repo.id, {
-        id: event.repo.id,
-        owner: event.repo.name.split("/")[0],
-        name: event.repo.name.split("/")[1],
-      });
-      }
+      // if (event.type === "PushEvent") {
+        committedRepositories.set(event.repo.id, {
+          id: event.repo.id,
+          owner: event.repo.name.split("/")[0],
+          name: event.repo.name.split("/")[1],
+        });
+      // }
     });
 
     // console.log("Committed repositories:", committedRepositories);

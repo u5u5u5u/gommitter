@@ -6,7 +6,6 @@ import BottomAppBarNavigation from "./navigation";
 
 const BottomAppBar = () => {
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
     <nav className="fixed bottom-0 max-w-[500px] w-full border-t border-gray-200">

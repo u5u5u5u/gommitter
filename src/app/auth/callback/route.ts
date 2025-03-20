@@ -6,7 +6,6 @@ import { getUser } from "@/utils/supabase/auth";
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  console.log("code", code);
   // if "next" is in param, use it as the redirect URL
   const next = searchParams.get("next") ?? "/";
 
@@ -27,7 +26,6 @@ export async function GET(request: Request) {
     if (!error) {
       const userData = await getUser();
       if (userData) {
-        console.log("userData", userData);
         const { id, user_name, display_name, avatar_url } = userData;
         const { error } = await supabase.from("users").upsert({
           id: id,
@@ -55,5 +53,5 @@ export async function GET(request: Request) {
   }
 
   // return the user to an error page with instructions
-  return NextResponse.redirect(`${origin}/auth/auth-code-error`);
+  return NextResponse.redirect(`${origin}/login`);
 }

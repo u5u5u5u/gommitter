@@ -13,7 +13,6 @@ export async function POST(req: Request) {
   params.append("client_id", process.env.GITHUB_CLIENT_ID!);
   params.append("client_secret", process.env.GITHUB_SECRET!);
   params.append("code", code);
-  console.log("params", params);
 
   try {
     const tokenRes = await fetch(
@@ -25,10 +24,8 @@ export async function POST(req: Request) {
     );
 
     const tokenData = await tokenRes.text();
-    console.log("tokenData", tokenData);
     const paramsObj = new URLSearchParams(tokenData);
     const accessToken = paramsObj.get("access_token");
-    console.log("accessToken", accessToken);
 
     // if (!accessToken) {
     //   return NextResponse.json(

@@ -2,8 +2,8 @@
 
 import SignOutButton from "@/components/auth/SignOutButton";
 import type { Repository } from "@/types/repository";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import RepositoryCard from "@/components/RepositoryCard";
 
 export default function Home() {
   const [repositories, setRepositories] = useState<Repository[]>([]);
@@ -20,24 +20,15 @@ export default function Home() {
     };
     fetchRepositories();
   }, []);
+  
+  console.log(repositories);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <SignOutButton />
-      <h1 className="text-4xl font-bold">Repositories</h1>
-      <ul>
-        {repositories &&
-          repositories.map((repository) => (
-            <Link
-              key={repository.id}
-              href={`/repositories/${repository.name}/${repository.owner}`}
-            >
-              <li>
-                <p>{repository.name}</p>
-              </li>
-            </Link>
-          ))}
-      </ul>
+    <div className="flex flex-col items-center h-screen space-y-2">
+      {repositories &&
+        repositories.map((repository) => (
+          <RepositoryCard key={repository.id} repository={repository} />
+        ))}
     </div>
   );
 }

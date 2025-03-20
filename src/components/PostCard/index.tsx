@@ -1,13 +1,13 @@
+import { formatDate } from "@/lib/formatData";
 import type { DisplayCommit } from "@/types/commit";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
-import { formatDate } from "@/lib/FormatData";
-import UserIcon from "./UserIcon";
-import CommentIcon from "./CommentIcon";
-import RePostIcon from "./RePostIcon";
-import HeartIcon from "./HeartIcon";
 import ChartIcon from "./ChartIcon";
+import CommentIcon from "./CommentIcon";
+import HeartIcon from "./HeartIcon";
+import RePostIcon from "./RePostIcon";
 import SaveIcon from "./SaveIcon";
 import ShareIcon from "./ShareIcon";
+import UserIcon from "./UserIcon";
 
 interface PostCardProps {
   commit: DisplayCommit;
@@ -15,7 +15,7 @@ interface PostCardProps {
 
 const PostCard = ({ commit }: PostCardProps) => {
   return (
-    <Card key={commit.id} className="w-[90%] py-4 gap-0">
+    <Card className="w-[90%] py-4 gap-0">
       <CardHeader>
         <UserIcon user={commit.user_id} />
       </CardHeader>

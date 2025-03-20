@@ -73,6 +73,7 @@ const getCommittedRepositories = async (accessToken: string) => {
         id: number;
         owner: string;
         name: string;
+        created_at: string;
       }
     >();
     events.forEach((event) => {
@@ -81,6 +82,7 @@ const getCommittedRepositories = async (accessToken: string) => {
           id: event.repo.id,
           owner: event.repo.name.split("/")[0],
           name: event.repo.name.split("/")[1],
+          created_at: event.created_at,
         });
       // }
     });

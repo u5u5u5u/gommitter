@@ -1,9 +1,8 @@
 "use client";
 
-import SignOutButton from "@/components/auth/SignOutButton";
+import RepositoryCard from "@/components/RepositoryCard";
 import type { Repository } from "@/types/repository";
 import { useEffect, useState } from "react";
-import RepositoryCard from "@/components/RepositoryCard";
 
 export default function Home() {
   const [repositories, setRepositories] = useState<Repository[]>([]);

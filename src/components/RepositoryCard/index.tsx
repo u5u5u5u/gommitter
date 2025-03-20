@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
-import type { Repository } from "@/types/repository";
 import { formatDate } from "@/lib/formatData";
+import type { Repository } from "@/types/repository";
+import Link from "next/link";
 
 interface RepositoryCardProps {
   repository: Repository;

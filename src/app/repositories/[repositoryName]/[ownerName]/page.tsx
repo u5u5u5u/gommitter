@@ -2,7 +2,7 @@
 
 import { use, useEffect, useState } from "react";
 import type { Commit } from "@/types/commit";
-import { createClient } from "@/utils/supabase/client";
+import CommitCard from "@/components/CommitCard";
 
 const CommitList = ({
   params,
@@ -29,29 +29,13 @@ const CommitList = ({
     fetchCommits();
   }, [repositoryName, ownerName]);
 
-  const post = async (message: string) => {
-    const supabase = createClient();
-    const { data: userData, error: userError } = await supabase.auth.getUser();
-    if (userError) {
-      console.error("Failed to get user", userError);
-    }
-    await supabase.from("commits").insert({
-      user_id: userData.user?.id,
-      message: message,
-    });
-  };
+  console.log(commits);
 
   return (
-    <div>
-      <h1>コミットメーセージ一覧</h1>
-      <ul>
-        {commits.map((commit) => (
-          <li key={commit.id}>
-            <p>{commit.message}</p>
-            <button onClick={() => post(commit.message)}>投稿</button>
-          </li>
-        ))}
-      </ul>
+    <div className="flex flex-col items-center h-screen space-y-2">
+      {commits.map((commit) => (
+        <CommitCard key={commit.id} commit={commit} />
+      ))}
     </div>
   );
 };

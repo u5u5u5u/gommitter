@@ -1,6 +1,6 @@
 import SocialLoginButtons from "@/components/auth/SocialLoginButton";
-import { createClient } from "@/utils/supabase/server";
 import PostCard from "@/components/PostCard";
+import { createClient } from "@/utils/supabase/server";
 
 export default async function Home() {
   const supabase = await createClient();

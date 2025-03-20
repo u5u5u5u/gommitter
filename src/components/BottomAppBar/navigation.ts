@@ -1,0 +1,30 @@
+import type { IconType } from "react-icons";
+import { AiOutlineHome } from "react-icons/ai";
+import { FaRegUserCircle } from "react-icons/fa";
+import { RiGitRepositoryLine } from "react-icons/ri";
+
+interface BottomAppBarNavigationType {
+  name: string;
+  href: string;
+  icon: IconType;
+}
+
+const BottomAppBarNavigation: BottomAppBarNavigationType[] = [
+  {
+    name: "Home",
+    href: "/",
+    icon: AiOutlineHome,
+  },
+  {
+    name: "Repositories",
+    href: "/repositories",
+    icon: RiGitRepositoryLine,
+  },
+  {
+    name: "Profile",
+    href: "/profile",
+    icon: FaRegUserCircle,
+  },
+];
+
+export default BottomAppBarNavigation;

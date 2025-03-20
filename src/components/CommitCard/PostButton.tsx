@@ -41,12 +41,14 @@ const PostButton = ({ message }: PostButtonProps) => {
             本当に投稿しますか？
           </DialogDescription>
         </DialogHeader>
-        <Button onClick={() => post(message)}>Post</Button>
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
             <Button type="button" variant="secondary">
               Cancel
             </Button>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button onClick={() => post(message)}>Post</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

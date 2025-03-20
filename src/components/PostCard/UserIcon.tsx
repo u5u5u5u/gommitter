@@ -14,7 +14,7 @@ const UserIcon = ({ user }: UserIconProps) => {
         <AvatarImage src={user.avatar_url} alt={user.display_name} />
         <AvatarFallback>{user.display_name}</AvatarFallback>
       </Avatar>
-      <span>{user.display_name}</span>
+      <span className="font-semibold">{user.display_name}</span>
     </div>
   );
 };

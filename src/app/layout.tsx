@@ -4,6 +4,7 @@ import "./globals.css";
 import BottomAppBar from "@/components/BottomAppBar";
 import Header from "@/components/Header";
 import FloatButton from "@/components/FloatButton";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
           <FloatButton />
         </main>
         <BottomAppBar />
+        <Toaster />
       </body>
     </html>
   );

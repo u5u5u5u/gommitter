@@ -1,32 +1,43 @@
 import { Button } from "@/components/ui/button";
-import { createClient } from "@/utils/supabase/client";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogFooter,
-  DialogClose,
 } from "@/components/ui/dialog";
+import { createClient } from "@/utils/supabase/client";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface PostButtonProps {
   message: string;
 }
 
 const PostButton = ({ message }: PostButtonProps) => {
+  const router = useRouter();
+
   const post = async (message: string) => {
     const supabase = createClient();
     const { data: userData, error: userError } = await supabase.auth.getUser();
     if (userError) {
       console.error("Failed to get user", userError);
     }
-    await supabase.from("commits").insert({
+    const { error: postError } = await supabase.from("commits").insert({
       user_id: userData.user?.id,
       message: message,
     });
+    if (postError) {
+      console.error("Failed to post commit", postError);
+    } else {
+      toast("ゴミットメッセージが投稿されました", { position: "top-center" });
+      router.push("/");
+    }
   };
+
   return (
     <Dialog>
       <DialogTrigger asChild>

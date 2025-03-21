@@ -59,6 +59,16 @@ const getCommittedRepositories = async (accessToken: string) => {
 
   try {
     const { data: user } = await octokit.request("GET /user");
+    const response = await octokit.rest.repos.listForUser({
+      username: user.login,
+    });
+
+    const userRepos = response.data.map((repo) => ({
+      id: repo.id,
+      owner: repo.owner.login,
+      name: repo.name,
+      created_at: repo.created_at,
+    }));
 
     const { data: events } = await octokit.request(
       `GET /users/${user.login}/events`,
@@ -76,18 +86,24 @@ const getCommittedRepositories = async (accessToken: string) => {
         created_at: string;
       }
     >();
-    events.forEach((event: { repo: { id: number; name: string }; created_at: string }) => {
-      // if (event.type === "PushEvent") {
-      committedRepositories.set(event.repo.id, {
-        id: event.repo.id,
-        owner: event.repo.name.split("/")[0],
-        name: event.repo.name.split("/")[1],
-        created_at: event.created_at,
-      });
-      // }
-    });
 
-    // console.log("Committed repositories:", committedRepositories);
+    events.forEach(
+      (event: { repo: { id: number; name: string }; created_at: string }) => {
+        committedRepositories.set(event.repo.id, {
+          id: event.repo.id,
+          owner: event.repo.name.split("/")[0],
+          name: event.repo.name.split("/")[1],
+          created_at: event.created_at,
+        });
+      }
+    );
+
+    userRepos.forEach((repo) => {
+      committedRepositories.set(repo.id, {
+        ...repo,
+        created_at: repo.created_at ?? "",
+      });
+    });
 
     return Array.from(committedRepositories.values());
   } catch (error) {

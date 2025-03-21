@@ -14,7 +14,7 @@ interface PostCardProps {
 
 const PostCard = ({ commit }: PostCardProps) => {
   return (
-    <div className="w-[90%] py-4 gap-0 border-b border-gray-200">
+    <div className="w-[90%] py-4 gap-0 border-b border-gray-200 -z-10">
       <div>
         <UserIcon user={commit.user_id} />
       </div>

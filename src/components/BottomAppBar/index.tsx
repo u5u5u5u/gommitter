@@ -9,7 +9,8 @@ const BottomAppBar = () => {
 
   return (
     <nav className="fixed bottom-0 max-w-[500px] w-full border-t border-gray-200">
-      <div className="max-w-2xl mx-auto px-10 py-4">
+      <div className="relative max-w-2xl mx-auto px-10 py-4">
+        <div className="absolute w-full h-full bg-white blur-lg -z-1"></div>
         <div className="flex justify-between items-center">
           {BottomAppBarNavigation.map((item) => {
             const isActive = pathname === item.href;

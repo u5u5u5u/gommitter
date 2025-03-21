@@ -10,7 +10,14 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const accessToken = process.env.GITHUB_ACCESS_TOKEN || "";
+  const { data: session, error: sessionError } =
+    await supabase.auth.getSession();
+  if (sessionError || !session || !session.session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const accessToken = session.session.provider_token;
+  console.log("accessToken", accessToken);
   if (!accessToken) {
     return NextResponse.json(
       { error: "GitHub access token not found" },

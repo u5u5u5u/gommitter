@@ -1,7 +1,7 @@
 import { formatDate } from "@/lib/formatData";
 import type { DisplayCommit } from "@/types/commit";
 import ChartIcon from "./ChartIcon";
-import CommentIcon from "./CommentIcon";
+import ReplyButton from "./ReplyButton";
 import HeartButton from "./HeartButton";
 import RePostIcon from "./RePostIcon";
 import SaveIcon from "./SaveIcon";
@@ -30,7 +30,7 @@ const PostItem = async ({ commit }: PostItemProps) => {
         <p className="text-sm text-gray-600">{formatDate(commit.created_at)}</p>
       </div>
       <div className="flex justify-between ml-10 mr-1">
-        <CommentIcon />
+        <ReplyButton commit_id={commit.id} />
         <RePostIcon />
         <HeartButton commit_id={commit.id} user_id={data.user?.id ?? ""} />
         <ChartIcon />

@@ -29,8 +29,6 @@ const CommitList = ({
     fetchCommits();
   }, [repositoryName, ownerName]);
 
-  console.log(commits);
-
   return (
     <div className="flex flex-col items-center h-screen space-y-2 mt-[64px]">
       {commits.map((commit) => (

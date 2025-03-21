@@ -17,12 +17,11 @@ const SocialLoginButtons = ({ provider }: SocialLoginButtonProps) => {
   const [redirectUrl, setRedirectUrl] = useState("");
   useEffect(() => {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/auth/callback`;
-    console.log("url", url);
     setRedirectUrl(url);
   }, []);
 
   const handleSocialLogin = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: providerTyped,
       options: {
         // サーバー側でのリダイレクトURLを指定
@@ -33,9 +32,6 @@ const SocialLoginButtons = ({ provider }: SocialLoginButtonProps) => {
     });
     if (error) {
       console.error("ログイン失敗", error);
-    }
-    if (data) {
-      console.log("ログイン成功", data);
     }
   };
 

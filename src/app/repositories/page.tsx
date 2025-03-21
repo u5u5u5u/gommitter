@@ -8,16 +8,10 @@ export default function Home() {
   const [repositories, setRepositories] = useState<Repository[]>([]);
 
   useEffect(() => {
-    const accessToken =
-      window.localStorage.getItem("oauth_provider_token") || "";
-    console.log("accessToken", accessToken);
     const fetchRepositories = async () => {
       try {
-        const response = await fetch(
-          `/api/github/committed-repository?access_token=${accessToken}`
-        );
+        const response = await fetch(`/api/github/committed-repository`);
         const { repositories } = await response.json();
-        console.log("repositories", repositories);
         setRepositories(repositories);
       } catch (error) {
         console.error("Failed to fetch repositories", error);
@@ -25,8 +19,6 @@ export default function Home() {
     };
     fetchRepositories();
   }, []);
-
-  console.log(repositories);
 
   return (
     <div className="flex flex-col items-center h-screen space-y-2 mt-[64px]">

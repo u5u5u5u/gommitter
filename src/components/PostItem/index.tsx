@@ -5,7 +5,7 @@ import ReplyButton from "./ReplyButton";
 import HeartButton from "./HeartButton";
 import RePostIcon from "./RePostIcon";
 import SaveIcon from "./SaveIcon";
-import ShareIcon from "./ShareIcon";
+import ShareButton from "./ShareButton";
 import UserIcon from "./UserIcon";
 import { createClient } from "@/utils/supabase/server";
 
@@ -35,7 +35,10 @@ const PostItem = async ({ commit }: PostItemProps) => {
         <HeartButton commit_id={commit.id} user_id={data.user?.id ?? ""} />
         <ChartIcon />
         <SaveIcon />
-        <ShareIcon />
+        <ShareButton
+          commit={commit.message}
+          user={commit.user_id.display_name}
+        />
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ export async function GET(req: Request) {
   const repoOwner = url.searchParams.get("owner");
   const repoName = url.searchParams.get("repo");
   const supabase = await createClient();
+  let accessToken;
 
   const { data, error } = await supabase.auth.getUser();
   if (error || !data.user) {
@@ -20,7 +21,13 @@ export async function GET(req: Request) {
     );
   }
 
-  const accessToken = process.env.GITHUB_ACCESS_TOKEN || "";
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  if (session && session.provider_token) {
+    accessToken = session.provider_token;
+  }
+
   if (!accessToken) {
     return NextResponse.json(
       { error: "GitHub access token not found" },

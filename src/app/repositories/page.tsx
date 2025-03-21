@@ -6,10 +6,11 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [repositories, setRepositories] = useState<Repository[]>([]);
-  const accessToken = window.localStorage.getItem("oauth_provider_token") || "";
-  console.log("accessToken", accessToken);
 
   useEffect(() => {
+    const accessToken =
+      window.localStorage.getItem("oauth_provider_token") || "";
+    console.log("accessToken", accessToken);
     const fetchRepositories = async () => {
       try {
         const response = await fetch(

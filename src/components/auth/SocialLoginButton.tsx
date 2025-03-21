@@ -20,7 +20,7 @@ const SocialLoginButtons = ({ provider }: SocialLoginButtonProps) => {
     const url =
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000/auth/callback"
-        : `${window.location.origin}/auth/callback`;
+        : `https://gommitter-cu5yb109i-u5s-projects.vercel.app/auth/callback`;
     setRedirectUrl(url);
   }, []);
 

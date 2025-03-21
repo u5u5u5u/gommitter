@@ -25,9 +25,6 @@ const BottomAppBarNavigation: BottomAppBarNavigationType[] = [
     href: "/profile",
     icon: FaRegUserCircle,
   },
-  {
-    name: "signout",
-  },
 ];
 
 export default BottomAppBarNavigation;

@@ -28,7 +28,7 @@ const SignOutButton = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <PiSignOutBold className="w-10 h-10 text-gray-400" />
+        <PiSignOutBold className="w-6 h-6" />
       </DialogTrigger>
       <DialogContent className="pt-10">
         <DialogHeader>

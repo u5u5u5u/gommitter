@@ -18,6 +18,7 @@ const SocialLoginButtons = ({ provider }: SocialLoginButtonProps) => {
 
   useEffect(() => {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/auth/callback`;
+    console.log("url", url);
     setRedirectUrl(url);
   }, []);
 

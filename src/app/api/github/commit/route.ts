@@ -20,7 +20,7 @@ export async function GET(req: Request) {
     );
   }
 
-  const accessToken = process.env.GITHUB_ACCESS_TOKEN;
+  const accessToken = process.env.GITHUB_ACCESS_TOKEN || "";
   if (!accessToken) {
     return NextResponse.json(
       { error: "GitHub access token not found" },

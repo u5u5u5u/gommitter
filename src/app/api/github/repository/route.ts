@@ -10,7 +10,7 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const accessToken = process.env.GITHUB_ACCESS_TOKEN;
+  const accessToken = process.env.GITHUB_ACCESS_TOKEN || "";
   if (!accessToken) {
     return NextResponse.json(
       { error: "GitHub access token not found" },

@@ -29,8 +29,6 @@ const CommitList = ({
     fetchCommits();
   }, [repositoryName, ownerName]);
 
-  console.log(commits);
-
   return (
     <>
       {commits ? (

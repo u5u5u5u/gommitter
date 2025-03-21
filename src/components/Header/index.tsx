@@ -8,7 +8,7 @@ const Header = async () => {
   const { data: authData, error: authError } = await supabase.auth.getUser();
   if (authError) {
     console.error(authError);
-    return <div>Failed to load user</div>;
+    return <div></div>;
   }
 
   const { data: userData, error: userError } = await supabase

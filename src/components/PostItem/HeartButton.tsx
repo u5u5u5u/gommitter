@@ -48,16 +48,28 @@ const HeartButton = ({ commit_id, user_id }: HeartButtonProps) => {
   const handleLike = async () => {
     const supabase = createClient();
     if (!liked) {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("likes")
         .insert([{ commit_id, user_id }]);
 
       if (error) {
         console.error("Error inserting like:", error);
       } else {
-        console.log("Like inserted:", data);
         setLiked(true);
         setLikesCount(likesCount + 1);
+      }
+    } else {
+      const { error } = await supabase
+        .from("likes")
+        .delete()
+        .eq("commit_id", commit_id)
+        .eq("user_id", user_id);
+
+      if (error) {
+        console.error("Error deleting like:", error);
+      } else {
+        setLiked(false);
+        setLikesCount(likesCount - 1);
       }
     }
   };

@@ -17,6 +17,7 @@ const SocialLoginButtons = ({ provider }: SocialLoginButtonProps) => {
   const [redirectUrl, setRedirectUrl] = useState("");
 
   useEffect(() => {
+    console.log("process.env.NODE_ENV", process.env.NODE_ENV);
     const url =
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000/auth/callback"

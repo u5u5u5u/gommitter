@@ -11,7 +11,7 @@ interface HeartButtonProps {
 
 const HeartButton = ({ commit_id, user_id }: HeartButtonProps) => {
   const [liked, setLiked] = useState(false);
-  const [likesCount, setLikesCount] = useState(0);
+  const [likesCount, setLikesCount] = useState<number>();
 
   useEffect(() => {
     const fetchLikes = async () => {
@@ -56,7 +56,7 @@ const HeartButton = ({ commit_id, user_id }: HeartButtonProps) => {
         console.error("Error inserting like:", error);
       } else {
         setLiked(true);
-        setLikesCount(likesCount + 1);
+        setLikesCount((likesCount ?? 0) + 1);
       }
     } else {
       const { error } = await supabase
@@ -69,7 +69,7 @@ const HeartButton = ({ commit_id, user_id }: HeartButtonProps) => {
         console.error("Error deleting like:", error);
       } else {
         setLiked(false);
-        setLikesCount(likesCount - 1);
+        setLikesCount((likesCount ?? 0) - 1);
       }
     }
   };

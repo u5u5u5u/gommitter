@@ -29,17 +29,16 @@ const CommitList = ({
     fetchCommits();
   }, [repositoryName, ownerName]);
 
+  console.log(commits);
+
   return (
     <>
       {commits ? (
-        commits.map((commit) => (
-          <div
-            key={commit.id}
-            className="flex flex-col items-center h-screen space-y-2 mt-[64px]"
-          >
-            <CommitCard commit={commit} />
-          </div>
-        ))
+        <div className="flex flex-col items-center h-screen space-y-2 mt-[64px]">
+          {commits.map((commit) => (
+            <CommitCard key={commit.id} commit={commit} />
+          ))}
+        </div>
       ) : (
         <div className="flex flex-col items-center justify-center h-screen space-y-2">
           <p>アクセスできるコミットメッセージがありません</p>

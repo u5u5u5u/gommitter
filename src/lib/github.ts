@@ -76,18 +76,18 @@ const getCommittedRepositories = async (accessToken: string) => {
         created_at: string;
       }
     >();
-    events.forEach(
-      (event: { repo: { id: number; name: string }; created_at: string }) => {
-        // if (event.type === "PushEvent") {
-        committedRepositories.set(event.repo.id, {
-          id: event.repo.id,
-          owner: event.repo.name.split("/")[0],
-          name: event.repo.name.split("/")[1],
-          created_at: event.created_at,
-        });
-        // }
-      }
-    );
+    events.forEach((event: { repo: { id: number; name: string }; created_at: string }) => {
+      // if (event.type === "PushEvent") {
+      committedRepositories.set(event.repo.id, {
+        id: event.repo.id,
+        owner: event.repo.name.split("/")[0],
+        name: event.repo.name.split("/")[1],
+        created_at: event.created_at,
+      });
+      // }
+    });
+
+    // console.log("Committed repositories:", committedRepositories);
 
     return Array.from(committedRepositories.values());
   } catch (error) {

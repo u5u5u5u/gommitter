@@ -1,8 +1,8 @@
 import type { IconType } from "react-icons";
 import { AiOutlineHome } from "react-icons/ai";
+import { FaRegBell } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import { MdMailOutline } from "react-icons/md";
-import { RiGitRepositoryLine } from "react-icons/ri";
 
 interface BottomAppBarNavigationType {
   name: string;
@@ -22,9 +22,9 @@ const BottomAppBarNavigation: BottomAppBarNavigationType[] = [
     icon: IoSearch,
   },
   {
-    name: "repositories",
-    href: "/repositories",
-    icon: RiGitRepositoryLine,
+    name: "notifications",
+    href: "/notifications",
+    icon: FaRegBell,
   },
   {
     name: "messages",

@@ -22,7 +22,7 @@ const PostCard = ({ commit }: PostCardProps) => {
         <p>{commit.message}</p>
         <p className="text-sm text-gray-600">{formatDate(commit.created_at)}</p>
       </div>
-      <div className="flex justify-between ml-10">
+      <div className="flex justify-between ml-10 mr-1">
         <CommentIcon />
         <RePostIcon />
         <HeartIcon />

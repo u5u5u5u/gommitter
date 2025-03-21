@@ -19,11 +19,11 @@ export default function Home() {
     };
     fetchRepositories();
   }, []);
-  
+
   console.log(repositories);
 
   return (
-    <div className="flex flex-col items-center h-screen space-y-2">
+    <div className="flex flex-col items-center h-screen space-y-2 mt-[64px]">
       {repositories &&
         repositories.map((repository) => (
           <RepositoryCard key={repository.id} repository={repository} />

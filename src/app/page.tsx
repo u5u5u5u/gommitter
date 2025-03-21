@@ -1,4 +1,4 @@
-import PostCard from "@/components/PostCard";
+import PostCard from "@/components/PostItem";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function Home() {

@@ -18,6 +18,7 @@ export interface DisplayCommit {
   message: string;
   created_at: string;
   user_id: {
+    id: number;
     display_name: string;
     avatar_url: string;
   };

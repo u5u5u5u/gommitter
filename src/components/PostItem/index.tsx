@@ -2,19 +2,26 @@ import { formatDate } from "@/lib/formatData";
 import type { DisplayCommit } from "@/types/commit";
 import ChartIcon from "./ChartIcon";
 import CommentIcon from "./CommentIcon";
-import HeartIcon from "./HeartIcon";
+import HeartButton from "./HeartButton";
 import RePostIcon from "./RePostIcon";
 import SaveIcon from "./SaveIcon";
 import ShareIcon from "./ShareIcon";
 import UserIcon from "./UserIcon";
+import { createClient } from "@/utils/supabase/server";
 
-interface PostCardProps {
+interface PostItemProps {
   commit: DisplayCommit;
 }
 
-const PostCard = ({ commit }: PostCardProps) => {
+const PostItem = async ({ commit }: PostItemProps) => {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.getUser();
+  if (error) {
+    console.error("Error getting user:", error);
+  }
+
   return (
-    <div className="w-[90%] py-4 gap-0 border-b border-gray-200 -z-10">
+    <div className="w-[90%] py-4 gap-0 border-b border-gray-200">
       <div>
         <UserIcon user={commit.user_id} />
       </div>
@@ -25,7 +32,7 @@ const PostCard = ({ commit }: PostCardProps) => {
       <div className="flex justify-between ml-10 mr-1">
         <CommentIcon />
         <RePostIcon />
-        <HeartIcon />
+        <HeartButton commit_id={commit.id} user_id={data.user?.id ?? ""} />
         <ChartIcon />
         <SaveIcon />
         <ShareIcon />
@@ -34,4 +41,4 @@ const PostCard = ({ commit }: PostCardProps) => {
   );
 };
 
-export default PostCard;
+export default PostItem;

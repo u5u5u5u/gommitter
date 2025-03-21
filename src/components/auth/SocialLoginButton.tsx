@@ -19,9 +19,9 @@ const SocialLoginButtons = ({ provider }: SocialLoginButtonProps) => {
   useEffect(() => {
     console.log("process.env.NODE_ENV", process.env.NODE_ENV);
     const url =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3000/auth/callback"
-        : `https://gommitter-cu5yb109i-u5s-projects.vercel.app/auth/callback`;
+      process.env.NODE_ENV === "production"
+        ? "https://gommitter-cu5yb109i-u5s-projects.vercel.app/auth/callback"
+        : "http://localhost:3000/auth/callback";
     setRedirectUrl(url);
   }, []);
 

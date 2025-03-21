@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { Provider } from "@supabase/auth-js";
 // import { getUser } from "@/utils/supabase/server";
@@ -13,10 +14,15 @@ interface SocialLoginButtonProps {
 const SocialLoginButtons = ({ provider }: SocialLoginButtonProps) => {
   const supabase = createClient();
   const providerTyped = provider as Provider;
-  const redirectUrl =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3000/auth/callback"
-      : `${window.location.origin}/auth/callback`;
+  const [redirectUrl, setRedirectUrl] = useState("");
+
+  useEffect(() => {
+    const url =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/auth/callback"
+        : `${window.location.origin}/auth/callback`;
+    setRedirectUrl(url);
+  }, []);
 
   const handleSocialLogin = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({

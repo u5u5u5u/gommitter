@@ -1,4 +1,4 @@
-import PostCard from "@/components/PostItem";
+// import PostCard from "@/components/PostItem";
 import { createClient } from "@/utils/supabase/server";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";

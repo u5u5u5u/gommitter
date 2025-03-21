@@ -1,6 +1,6 @@
 // /app/api/github/token/route.ts
 import { NextResponse } from "next/server";
-import { createClient } from "@/utils/supabase/server";
+// import { createClient } from "@/utils/supabase/server";
 
 export async function POST(req: Request) {
   const { code } = await req.json();
@@ -15,17 +15,17 @@ export async function POST(req: Request) {
   params.append("code", code);
 
   try {
-    const tokenRes = await fetch(
-      "https://github.com/login/oauth/access_token",
-      {
-        method: "POST",
-        body: params,
-      }
-    );
+    // const tokenRes = await fetch(
+    //   "https://github.com/login/oauth/access_token",
+    //   {
+    //     method: "POST",
+    //     body: params,
+    //   }
+    // );
 
-    const tokenData = await tokenRes.text();
-    const paramsObj = new URLSearchParams(tokenData);
-    const accessToken = paramsObj.get("access_token");
+    // const tokenData = await tokenRes.text();
+    // const paramsObj = new URLSearchParams(tokenData);
+    // const accessToken = paramsObj.get("access_token");
 
     // if (!accessToken) {
     //   return NextResponse.json(

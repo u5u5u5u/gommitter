@@ -76,7 +76,7 @@ const getCommittedRepositories = async (accessToken: string) => {
         created_at: string;
       }
     >();
-    events.forEach((event) => {
+    events.forEach((event: { repo: { id: number; name: string }; created_at: string }) => {
       // if (event.type === "PushEvent") {
       committedRepositories.set(event.repo.id, {
         id: event.repo.id,

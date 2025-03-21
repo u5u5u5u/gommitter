@@ -43,14 +43,11 @@ export async function GET(request: Request) {
       const isLocalEnv = process.env.NODE_ENV === "development";
       console.log("isLocalEnv", isLocalEnv);
       if (isLocalEnv) {
-        console.log("redirecting to", `${origin}${next}`);
         // we can be sure that there is no load balancer in between, so no need to watch for X-Forwarded-Host
         return NextResponse.redirect(`${origin}${next}`);
       } else if (forwardedHost) {
-        console.log("redirecting to", `https://${forwardedHost}${next}`);
         return NextResponse.redirect(`https://${forwardedHost}${next}`);
       } else {
-        console.log("redirecting to", `${origin}${next}`);
         return NextResponse.redirect(`${origin}${next}`);
       }
     }

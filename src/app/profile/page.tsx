@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { PiCalendarDots } from "react-icons/pi";
-import { formatDate } from "@/lib/formatData";
+import { dateFormat } from "@/lib/dateFormat";
 
 const ProfilePage = async () => {
   const supabase = await createClient();
@@ -69,7 +69,7 @@ const ProfilePage = async () => {
           <div className="flex items-center space-x-2 text-[14px] text-gray-500">
             <PiCalendarDots className="w-4 h-4" />
             <span>
-              {formatDate(userData.created_at, "short")}からGを利用しています
+              {dateFormat(userData.created_at, "short")}からGを利用しています
             </span>
           </div>
         </div>

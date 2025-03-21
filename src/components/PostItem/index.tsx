@@ -1,4 +1,4 @@
-import { formatDate } from "@/lib/formatData";
+import { dateFormat } from "@/lib/dateFormat";
 import type { DisplayCommit } from "@/types/commit";
 import ChartIcon from "./ChartIcon";
 import ReplyButton from "./ReplyButton";
@@ -27,7 +27,7 @@ const PostItem = async ({ commit }: PostItemProps) => {
       </div>
       <div className="ml-10 mb-4 space-y-2">
         <p>{commit.message}</p>
-        <p className="text-sm text-gray-600">{formatDate(commit.created_at)}</p>
+        <p className="text-sm text-gray-600">{dateFormat(commit.created_at)}</p>
       </div>
       <div className="flex justify-between ml-10 mr-1">
         <ReplyButton commit_id={commit.id} />

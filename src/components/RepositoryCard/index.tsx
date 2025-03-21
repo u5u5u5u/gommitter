@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { formatDate } from "@/lib/formatData";
+import { dateFormat } from "@/lib/dateFormat";
 import type { Repository } from "@/types/repository";
 import Link from "next/link";
 
@@ -21,7 +21,8 @@ const RepositoryCard = ({ repository }: RepositoryCardProps) => {
             作成者<span className="ml-2">{repository.owner}</span>
           </p>
           <p className="text-sm font-light">
-            作成日<span className="ml-2">{formatDate(repository.created_at)}</span>
+            作成日
+            <span className="ml-2">{dateFormat(repository.created_at)}</span>
           </p>
         </CardContent>
       </Card>

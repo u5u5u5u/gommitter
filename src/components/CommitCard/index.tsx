@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { formatDate } from "@/lib/formatData";
+import { dateFormat } from "@/lib/dateFormat";
 import type { Commit } from "@/types/commit";
 import PostButton from "@/components/CommitCard/PostButton";
 
@@ -12,7 +12,7 @@ const CommitCard = ({ commit }: CommitCardProps) => {
     <Card className="w-[90%] py-4 gap-0">
       <CardContent>
         <p>{commit.message}</p>
-        <p className="text-sm text-gray-600">{formatDate(commit.date)}</p>
+        <p className="text-sm text-gray-600">{dateFormat(commit.date)}</p>
         <div className="flex justify-end">
           <PostButton message={commit.message} />
         </div>

@@ -4,7 +4,7 @@ const ChartIcon = () => {
   return (
     <div className="flex items-center space-x-1 text-xs">
       <BiBarChart />
-      <span>10</span>
+      <span>{Math.floor(Math.random() * 1000)}</span>
     </div>
   );
 };

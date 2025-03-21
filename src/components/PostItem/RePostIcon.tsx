@@ -4,7 +4,7 @@ const RePostIcon = () => {
   return (
     <div className="flex items-center space-x-1 text-xs">
       <AiOutlineRetweet />
-      <span>10</span>
+      <span>{Math.floor(Math.random() * 10)}</span>
     </div>
   );
 };

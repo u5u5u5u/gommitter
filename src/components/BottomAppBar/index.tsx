@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import BottomAppBarNavigation from "./navigation";
+import SignOutButton from "../auth/SignOutButton";
 
 const BottomAppBar = () => {
   const pathname = usePathname();
@@ -13,15 +14,21 @@ const BottomAppBar = () => {
         <div className="flex justify-between items-center">
           {BottomAppBarNavigation.map((item) => {
             const isActive = pathname === item.href;
-            return (
-              <Link key={item.name} href={item.href}>
-                <item.icon
-                  className={`w-10 h-10 ${
-                    isActive ? "text-black" : "text-gray-400"
-                  }`}
-                />
-              </Link>
-            );
+            if (item.name !== "signout") {
+              return (
+                <Link key={item.name} href={item.href || "/"}>
+                  {item.icon && (
+                    <item.icon
+                      className={`w-10 h-10 ${
+                        isActive ? "text-black" : "text-gray-400"
+                      }`}
+                    />
+                  )}
+                </Link>
+              );
+            } else {
+              return <SignOutButton key={item.name} />;
+            }
           })}
         </div>
       </div>

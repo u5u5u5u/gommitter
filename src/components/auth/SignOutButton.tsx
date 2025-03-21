@@ -1,6 +1,7 @@
 "use client";
 
 import { createClient } from "@/utils/supabase/client";
+import { PiSignOutBold } from "react-icons/pi";
 
 const SignOutButton = () => {
   const supabase = createClient();
@@ -13,7 +14,11 @@ const SignOutButton = () => {
     }
   };
 
-  return <button onClick={handleSignOut}>サインアウト</button>;
+  return (
+    <button onClick={handleSignOut}>
+      <PiSignOutBold className="w-10 h-10 text-gray-400" />
+    </button>
+  );
 };
 
 export default SignOutButton;

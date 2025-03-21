@@ -5,25 +5,28 @@ import { RiGitRepositoryLine } from "react-icons/ri";
 
 interface BottomAppBarNavigationType {
   name: string;
-  href: string;
-  icon: IconType;
+  href?: string;
+  icon?: IconType;
 }
 
 const BottomAppBarNavigation: BottomAppBarNavigationType[] = [
   {
-    name: "Home",
+    name: "home",
     href: "/",
     icon: AiOutlineHome,
   },
   {
-    name: "Repositories",
+    name: "repositories",
     href: "/repositories",
     icon: RiGitRepositoryLine,
   },
   {
-    name: "Profile",
+    name: "profile",
     href: "/profile",
     icon: FaRegUserCircle,
+  },
+  {
+    name: "signout",
   },
 ];
 

@@ -78,12 +78,12 @@ const getCommittedRepositories = async (accessToken: string) => {
     >();
     events.forEach((event) => {
       // if (event.type === "PushEvent") {
-        committedRepositories.set(event.repo.id, {
-          id: event.repo.id,
-          owner: event.repo.name.split("/")[0],
-          name: event.repo.name.split("/")[1],
-          created_at: event.created_at,
-        });
+      committedRepositories.set(event.repo.id, {
+        id: event.repo.id,
+        owner: event.repo.name.split("/")[0],
+        name: event.repo.name.split("/")[1],
+        created_at: event.created_at,
+      });
       // }
     });
 

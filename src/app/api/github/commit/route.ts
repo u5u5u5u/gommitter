@@ -24,7 +24,6 @@ export async function GET(req: Request) {
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  console.log("session", session);
   if (session && session.provider_token) {
     accessToken = session.provider_token;
   }

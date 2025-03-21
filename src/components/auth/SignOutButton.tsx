@@ -13,15 +13,17 @@ import {
 } from "@/components/ui/dialog";
 import { createClient } from "@/utils/supabase/client";
 import { PiSignOutBold } from "react-icons/pi";
+import { useRouter } from "next/navigation";
 
 const SignOutButton = () => {
   const supabase = createClient();
+  const router = useRouter();
   const handleSignOut = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
       console.error("サインアウト失敗", error);
     } else {
-      console.log("サインアウト成功");
+      router.push("/");
     }
   };
 

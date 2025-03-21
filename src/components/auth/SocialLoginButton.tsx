@@ -17,8 +17,7 @@ const SocialLoginButtons = ({ provider }: SocialLoginButtonProps) => {
   const [redirectUrl, setRedirectUrl] = useState("");
 
   useEffect(() => {
-    console.log("process.env.NODE_ENV", process.env.NODE_ENV);
-    const url = `${window.location.origin}/auth/callback`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/auth/callback`;
     setRedirectUrl(url);
   }, []);
 

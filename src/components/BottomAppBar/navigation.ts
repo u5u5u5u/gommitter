@@ -1,6 +1,7 @@
 import type { IconType } from "react-icons";
 import { AiOutlineHome } from "react-icons/ai";
-import { FaRegUserCircle } from "react-icons/fa";
+import { IoSearch } from "react-icons/io5";
+import { MdMailOutline } from "react-icons/md";
 import { RiGitRepositoryLine } from "react-icons/ri";
 
 interface BottomAppBarNavigationType {
@@ -16,14 +17,19 @@ const BottomAppBarNavigation: BottomAppBarNavigationType[] = [
     icon: AiOutlineHome,
   },
   {
+    name: "search",
+    href: "/search",
+    icon: IoSearch,
+  },
+  {
     name: "repositories",
     href: "/repositories",
     icon: RiGitRepositoryLine,
   },
   {
-    name: "profile",
-    href: "/profile",
-    icon: FaRegUserCircle,
+    name: "messages",
+    href: "/messages",
+    icon: MdMailOutline,
   },
 ];
 

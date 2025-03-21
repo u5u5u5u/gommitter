@@ -12,7 +12,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="flex flex-col items-center h-screen space-y-2">
+    <div className="flex flex-col items-center h-screen space-y-2 mt-[64px]">
       {data?.map((commit) => (
         <PostCard commit={commit} key={commit.id} />
       ))}

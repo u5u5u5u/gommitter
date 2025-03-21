@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased w-full max-w-[500px] m-auto bg-white`}
       >
         <Header />
-        <main className="mt-[64px]">{children}</main>
+        <main>{children}</main>
         <BottomAppBar />
       </body>
     </html>

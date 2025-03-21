@@ -3,6 +3,8 @@
 import { createClient } from "@/utils/supabase/client";
 import { Provider } from "@supabase/auth-js";
 // import { getUser } from "@/utils/supabase/server";
+import { Button } from "@/components/ui/button";
+import { FaGithub } from "react-icons/fa";
 
 interface SocialLoginButtonProps {
   provider: string;
@@ -36,7 +38,10 @@ const SocialLoginButtons = ({ provider }: SocialLoginButtonProps) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-sm">
-      <button onClick={handleSocialLogin}>{provider}でログイン</button>
+      <Button variant="outline" onClick={handleSocialLogin}>
+        <FaGithub />
+        {provider}でログイン
+      </Button>
     </div>
   );
 };

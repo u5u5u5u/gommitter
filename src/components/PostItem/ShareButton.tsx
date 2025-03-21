@@ -1,11 +1,7 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -19,6 +15,7 @@ interface ShareButtonProps {
 }
 
 const ShareButton = ({ commit, user }: ShareButtonProps) => {
+  const url = `https://gommits.vercel.app`;
   const text = `${user}が「${commit}」というゴミットメッセージを投稿しました。`;
   return (
     <Drawer>
@@ -34,7 +31,7 @@ const ShareButton = ({ commit, user }: ShareButtonProps) => {
           </DrawerHeader>
           <div className="ml-4">
             <Link
-              href={`https://twitter.com/intent/tweet?text=${text}`}
+              href={`https://twitter.com/intent/tweet?text=${text}&url=${url}`}
               target="_blank"
               className="flex items-center space-x-2 w-10 h-10 p-2 rounded-full bg-gray-100"
             >

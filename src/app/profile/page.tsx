@@ -1,10 +1,10 @@
-// import PostCard from "@/components/PostItem";
-import { createClient } from "@/utils/supabase/server";
+import ProfilePosts from "@/components/Profile/Posts";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { PiCalendarDots } from "react-icons/pi";
 import { dateFormat } from "@/lib/dateFormat";
+import { createClient } from "@/utils/supabase/server";
+import Image from "next/image";
+import { PiCalendarDots } from "react-icons/pi";
 
 const ProfilePage = async () => {
   const supabase = await createClient();
@@ -76,43 +76,21 @@ const ProfilePage = async () => {
 
         <div className="mt-4 flex space-x-6 text-[14px]">
           <div>
-            <span className="font-bold">1000</span>
+            <span className="font-bold">
+              {Math.floor(Math.random() * 1000)}
+            </span>
             <span className="text-gray-500 ml-1">フォロー中</span>
           </div>
           <div>
-            <span className="font-bold">1000</span>
+            <span className="font-bold">
+              {Math.floor(Math.random() * 1000)}
+            </span>
             <span className="text-gray-500 ml-1">フォロワー</span>
           </div>
         </div>
       </div>
-
       <div>
-        <nav className="flex">
-          <Button
-            variant="ghost"
-            className="flex-1 px-4 py-4 text-center rounded-none border-b-2 border-blue-500 font-bold"
-          >
-            ポスト
-          </Button>
-          <Button
-            variant="ghost"
-            className="flex-1 px-4 py-4 text-center rounded-none text-gray-500 hover:bg-gray-50 transition-colors"
-          >
-            返信
-          </Button>
-          <Button
-            variant="ghost"
-            className="flex-1 px-4 py-4 text-center rounded-none text-gray-500 hover:bg-gray-50 transition-colors"
-          >
-            メディア
-          </Button>
-          <Button
-            variant="ghost"
-            className="flex-1 px-4 py-4 text-center rounded-none text-gray-500 hover:bg-gray-50 transition-colors"
-          >
-            いいね
-          </Button>
-        </nav>
+        <ProfilePosts />
 
         <div className="divide-y divide-gray-200"></div>
       </div>

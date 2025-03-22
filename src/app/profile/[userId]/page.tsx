@@ -5,11 +5,17 @@ import { dateFormat } from "@/lib/dateFormat";
 import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import { PiCalendarDots } from "react-icons/pi";
+import FollowButton from "@/components/Profile/FollowButton";
 
-const ProfilePage = async () => {
+const ProfilePage = async ({
+  params,
+}: {
+  params: Promise<{ userId: string }>;
+}) => {
+  const { userId } = await params;
   const supabase = await createClient();
-  const { data: authData, error: authError } = await supabase.auth.getUser();
 
+  const { data: authData, error: authError } = await supabase.auth.getUser();
   if (authError) {
     console.error(authError);
     return <div>Failed to load user</div>;
@@ -18,17 +24,28 @@ const ProfilePage = async () => {
   const { data: userData, error: userError } = await supabase
     .from("users")
     .select("*")
-    .eq("id", authData.user.id)
+    .eq("id", userId)
     .single();
   if (userError) {
     console.error(userError);
     return <div>Failed to load user profile</div>;
   }
 
+  const { data: followData, error: followError } = await supabase
+    .from("follows")
+    .select("*")
+    .eq("from_user_id", authData.user?.id)
+    .eq("to_user_id", userId)
+    .limit(1);
+  if (followError) {
+    console.error(followError);
+    return <div>Failed to load follow data</div>;
+  }
+
   const { data: followingData, error: followingError } = await supabase
     .from("follows")
     .select("*")
-    .eq("from_user_id", authData.user.id);
+    .eq("from_user_id", userId);
   if (followingError) {
     console.error(followingError);
     return <div>Failed to load following data</div>;
@@ -37,7 +54,7 @@ const ProfilePage = async () => {
   const { data: followedData, error: followedError } = await supabase
     .from("follows")
     .select("*")
-    .eq("to_user_id", authData.user.id);
+    .eq("to_user_id", userId);
   if (followedError) {
     console.error(followedError);
     return <div>Failed to load followed data</div>;
@@ -64,12 +81,20 @@ const ProfilePage = async () => {
       </div>
 
       <div className="flex justify-end mt-3 mr-3">
-        <Button
-          variant="ghost"
-          className="px-4 py-2 text-sm border border-gray-300 rounded-full font-bold hover:bg-gray-50 transition-colors"
-        >
-          編集
-        </Button>
+        {authData.user?.id === userData.id ? (
+          <Button
+            variant="ghost"
+            className="px-4 py-2 text-sm border border-gray-300 rounded-full font-bold transition-colors"
+          >
+            編集
+          </Button>
+        ) : (
+          <FollowButton
+            isFollowing={followData.length > 0 ? true : false}
+            from_user_id={authData.user?.id}
+            to_user_id={userId}
+          />
+        )}
       </div>
 
       <div className="px-4 pb-4">
